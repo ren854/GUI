@@ -42,7 +42,7 @@ var3 = IntVar()
 
     #####-------------主邏輯------------------
         ######-----------參數定義-----------------
-Label_1=Label(root,text="輸入:")
+Label_1=Label(root,text="請選擇網站:")
 Label_2=Label(root,text="輸入關鍵字:")
 Label_3=Label(root,text="儲存方式:")
 Entry_1=Entry(root)
@@ -54,7 +54,7 @@ result_del=Label(root,textvariable=show_del,height=3)
 result_time=Label(root,textvariable=show_time,height=1)
 
         ######-----------按鈕宣告-----------------
-Button_01=Button(root,text="sha_1",command=Sub_Test_01)
+
 Button_EXIT=Button(root,text="EXIT",command=root.destroy)
 Button_03=Button(root,text="爬蟲開始",command=check_01)
 
@@ -64,27 +64,27 @@ Checkbutton1=Checkbutton(root, text="CSV", variable=var1)
 Checkbutton2=Checkbutton(root, text="DB", variable=var3)
 
         ######---------------排版-----------------
+Label_1.grid(row=3)
+Label_2.grid(row=1)
+Label_3.grid(row=2)
 
-Label_2.grid(row=3)
-Label_3.grid(row=4)
-
-Entry_2.grid(row=3,column=1)
+Entry_2.grid(row=1,column=1)
 #Entry_3.grid(row=4,column=1)
 
 
-result_del.grid(row=6,column=1)
-result_time.grid(row=7,column=1)
+result_del.grid(row=4,column=1)
+result_time.grid(row=5,column=1)
 
 
-Button_EXIT.grid(row=8,column=3)
-Button_03.grid(row=6,column=3)
+Button_EXIT.grid(row=6,column=3)
+Button_03.grid(row=4,column=3)
 
 #Checkbutton1.grid(row=4,column=1)
 #Checkbutton2.grid(row=4,column=2)
 
-Checkbutton1.grid(row=4,column=1)
-Checkbutton2.grid(row=4,column=2)
-Radiobutton1.grid(row=5,column=1)
-Radiobutton2.grid(row=5,column=2)
+Checkbutton1.grid(row=2,column=1)
+Checkbutton2.grid(row=2,column=2)
+Radiobutton1.grid(row=3,column=1)
+Radiobutton2.grid(row=3,column=2)
 
 root.mainloop()
