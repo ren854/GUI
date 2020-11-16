@@ -3,13 +3,16 @@ from tkinter import *
 import hashlib
 import time
 import threading
+import worm_EX_ver as pchome_ver
 #'''----------------------- subfuntion ----------------------- '''
 
 
-def check_01():
+def find_totalPage():
     choice_ = [var2.get(), var1.get(), var3.get()]
     show_time.set(choice_)
-
+    key_word=Entry_2.get()
+    totalPage=pchome_ver.get_max_pages(key_word)
+    show_time.set(totalPage)
 
 #'''------------------------- main() --------------------------'''
     # -------參數宣告-----------------
@@ -47,7 +50,7 @@ result_time = Label(root, textvariable=show_time, height=1)
 
 # >>>>>>> ff8d9f7f1ca16989e4cc32bb13fe6d8e8da2dd91
 Button_EXIT = Button(root, text="EXIT", command=root.destroy)
-Button_03 = Button(root, text="爬蟲開始", command=check_01)
+Button_03 = Button(root, text="爬蟲開始", command=find_totalPage)
 
 Radiobutton1 = Radiobutton(root, text='PChome', variable=var2, value=2)
 Radiobutton2 = Radiobutton(root, text='衣服', variable=var2, value=10)
