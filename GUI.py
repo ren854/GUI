@@ -27,17 +27,49 @@ var1 = IntVar()
 var2 = IntVar()
 var3 = IntVar()
 
+#<<<<<<< Updated upstream
 # -------------主邏輯------------------
 # -----------參數定義-----------------
+#=======
+    #####-------------主邏輯------------------
+        ######-----------參數定義-----------------
+#<<<<<<< HEAD
+'''Label_1=Label(root,text="輸入:")
+#=======
+Label_1=Label(root,text="請選擇網站:")
+#>>>>>>> ff8d9f7f1ca16989e4cc32bb13fe6d8e8da2dd91
+Label_2=Label(root,text="輸入關鍵字:")
+Label_3=Label(root,text="儲存方式:")
+Entry_1=Entry(root)
+Entry_2=Entry(root)
+Entry_3=Entry(root)
+
+result=Label(root,textvariable=show,height=3,width=30)
+result_del=Label(root,textvariable=show_del,height=3)
+result_time=Label(root,textvariable=show_time,height=1)'''
+
+        ######-----------按鈕宣告-----------------
+#<<<<<<< HEAD
+'''Button_01=Button(root,text="sha_1",command=Sub_Test_01)'''
+#=======
+
+#>>>>>>> ff8d9f7f1ca16989e4cc32bb13fe6d8e8da2dd91
+Button_EXIT=Button(root,text="EXIT",command=root.destroy)
+Button_03=Button(root,text="爬蟲開始",command=find_totalPage)
+#Button_03.grid(sticky = W)
+#>>>>>>> Stashed changes
 
 # =======
 Label_1 = Label(root, text="請選擇網站:")
 # >>>>>>> ff8d9f7f1ca16989e4cc32bb13fe6d8e8da2dd91
 Label_2 = Label(root, text="輸入關鍵字:")
 Label_3 = Label(root, text="儲存方式:")
+Label_4 = Label(root, text="輸入想抓取的總頁數(小於100):")
+
 Entry_1 = Entry(root)
 Entry_2 = Entry(root)
 Entry_3 = Entry(root)
+Entry_4 = Entry(root)
 
 result = Label(root, textvariable=show, height=3, width=30)
 result_del = Label(root, textvariable=show_del, height=3)
@@ -62,9 +94,12 @@ Checkbutton2 = Checkbutton(root, text="DB", variable=var3)
 Label_1.grid(row=3)
 Label_2.grid(row=1)
 Label_3.grid(row=2)
+Label_4.grid(row=4)
 
 Entry_2.grid(row=1, column=1)
 # Entry_3.grid(row=4,column=1)
+Entry_4.grid(row=4, column=1)
+
 
 
 result_del.grid(row=4, column=1)

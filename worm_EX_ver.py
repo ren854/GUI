@@ -22,7 +22,7 @@ def prods_list(serch,p):
         list1.append(webdata)
     return list1   
 
-ts=prods_list(serch,p)
+#ts=prods_list(serch,p)
 #print(ts)
  
 
