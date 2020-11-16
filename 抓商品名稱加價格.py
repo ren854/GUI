@@ -31,7 +31,7 @@ for p in range(5):
     
 
 
-
+''' CSV 暫時註解掉 看看還要存什麼進去 
 with open('a.csv', 'a' , encoding = 'utf-8-sig' , newline = '') as csvfile:
     w = csv.writer(csvfile)
     filednames=(['名稱','價格','圖1'])
@@ -43,5 +43,31 @@ with open('a.csv', 'a' , encoding = 'utf-8-sig' , newline = '') as csvfile:
             w.writerow({'名稱':aa[i][j]['Name'],
                         '價格':aa[i][j]['Price'],
                         '圖1':"https://s2.lativ.com.tw" + aa[i][j]['Image']})
+'''
+
+def text_cleanup(text):
+    new =""
+    for i in text:
+        if i not in'\?.!/;:"*<>|':
+            new += i
+    return new
 
 
+
+def get_ph():
+    for i in range(len(aa)):
+        for j in range(len(aa[i])):
+                url_1 = "https://s2.lativ.com.tw" + aa[i][j]['Image']
+                path =  aa[i][j]['Name']
+                title = text_cleanup(path)
+                filepath_1 =  title + '/' + "1" + '.jpg'
+                if not os.path.isdir(title):  #檢查是否已經有了
+                    os.mkdir(title) #沒有的用標題建立資料夾
+                    
+######################### 產品名稱重複 資料夾無法創建 圖少抓 ###########################
+
+                    if not os.path.isfile(filepath_1): #檢查是否下載過圖片，沒有就下載
+                        wget.download(url_1,filepath_1)
+
+get_ph()
+                        

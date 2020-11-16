@@ -101,6 +101,9 @@ def get_max_pages(serch):
 def i_cant_understand(serch,p):############我看不懂##################################################
     ts=prods_list(serch,p)
     return ts
+##############################  ts 是我當初懶得用def設的 第12行的function 用ts我可以少打字 ######################################
+
+
 
 if __name__== "__main__":
     
