@@ -9,14 +9,11 @@ import threading
 def check_01():
     choice_ = [var2.get(), var1.get(), var3.get()]
     show_time.set(choice_)
-    global flag
-    flag = True
 
 
 #'''------------------------- main() --------------------------'''
     # -------參數宣告-----------------
-global flag
-flag = False
+
 root = Tk()
 root.title("mark1_test1")
 show = StringVar()
@@ -80,7 +77,6 @@ Checkbutton2.grid(row=2, column=2)
 Radiobutton1.grid(row=3, column=1)
 Radiobutton2.grid(row=3, column=2)
 # >>>>>>> ff8d9f7f1ca16989e4cc32bb13fe6d8e8da2dd91
-if flag==True:
-    show_time.set("choice_")
+
 
 root.mainloop()
