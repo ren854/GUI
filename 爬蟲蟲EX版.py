@@ -8,25 +8,6 @@ import wget
 headers = {'cookie': 'ECC=GoogleBot',
            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36'}
 
-
-serch = str(input("想抓點什麼呢? "))
-
-url ="https://ecshweb.pchome.com.tw/search/v3.3/all/results?q={}&page=1&sort=sale/dc".format(serch)
-res = requests.get(url,headers=headers)
-data = json.loads(res.text)
-#讀取網頁資訊
-#print(data['totalPage']) 頁數數量
-
-Tp = data['totalPage']+1
-
-
-#輸入條件
-print("最大頁數為 " + str(Tp))
-p = int(input("請輸入 < " + str(Tp) + " 的數字"))
-print("開始讀取資料")    
-
-
-
 #將所有產品的網址存成一個list
 def prods_list(serch,p):
     list1=[]
@@ -70,10 +51,6 @@ def csv_1():
 #圖片 = http://d.ecimg.tw/ + 'picB'    
 '''
 
-
-
-
-
 #清除非法字元
 def text_cleanup(text):
     new =""
@@ -108,6 +85,39 @@ def get_ph():
                     print("圖片要滿出來啦 >_<")
 #get_ph()
 
+def get_max_pages(serch):
+    serch=str(serch)
+
+    url ="https://ecshweb.pchome.com.tw/search/v3.3/all/results?q={}&page=1&sort=sale/dc".format(serch)
+    res = requests.get(url,headers=headers)
+    data = json.loads(res.text)
+    #讀取網頁資訊
+    #print(data['totalPage']) 頁數數量
+
+    Tp = data['totalPage']+1
+
+    return Tp
+    
+def i_cant_understand(serch,p):############我看不懂##################################################
+    ts=prods_list(serch,p)
+    return ts
+
+if __name__==if __name__ == "__main__":
+    
+    serch = str(input("想抓點什麼呢? "))
+
+    url ="https://ecshweb.pchome.com.tw/search/v3.3/all/results?q={}&page=1&sort=sale/dc".format(serch)
+    res = requests.get(url,headers=headers)
+    data = json.loads(res.text)
+    #讀取網頁資訊
+    #print(data['totalPage']) 頁數數量
+
+    Tp = data['totalPage']+1
 
 
+    #輸入條件
+    print("最大頁數為 " + str(Tp))
+    p = int(input("請輸入 < " + str(Tp) + " 的數字"))
+    print("開始讀取資料")  
+    ts=prods_list(serch,p)
 
