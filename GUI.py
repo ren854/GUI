@@ -22,8 +22,9 @@ def find_totalPage():
 root = Tk()
 root.title("mark1_test1")
 show = StringVar()
-Label_4 = StringVar("輸入想抓取的總頁數(小於):")
+Label_4_show = StringVar()
 show_time = StringVar()
+Label_4_show.set("輸入想抓取的總頁數(小於):")
 
 var1 = IntVar()
 var2 = IntVar()
@@ -67,7 +68,8 @@ Label_1 = Label(root, text="請選擇網站:")
 # >>>>>>> ff8d9f7f1ca16989e4cc32bb13fe6d8e8da2dd91
 Label_2 = Label(root, text="輸入關鍵字:")
 Label_3 = Label(root, text="儲存方式:")
-Label_4 = Label(root, text=Label_4_show)
+#Label_4 = Label(root, text="輸入想抓取的總頁數(小於){}:")
+Label_4 = Label(root, textvariable=Label_4_show)
 #.format(find_totalPage.totalPage)
 #.format(find_totalPage()
 
