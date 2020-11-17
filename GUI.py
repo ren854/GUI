@@ -13,7 +13,7 @@ def find_totalPage():
     key_word=Entry_2.get()
     totalPage=pchome_ver.get_max_pages(key_word)
     show_time.set(totalPage)
-    Label_4_show.set("輸入想抓取的總頁數(小於){}:".format(totalPage))
+    Label_4_show.set("輸入想抓取的總頁數(小於{}):".format(totalPage))
     return totalPage
 
 #'''------------------------- main() --------------------------'''
@@ -24,7 +24,7 @@ root.title("mark1_test1")
 show = StringVar()
 Label_4_show = StringVar()
 show_time = StringVar()
-Label_4_show.set("輸入想抓取的總頁數(小於):")
+Label_4_show.set("輸入想抓取的總頁數:")
 
 var1 = IntVar()
 var2 = IntVar()
@@ -114,7 +114,7 @@ result_time.grid(row=5, column=1)
 
 
 Button_EXIT.grid(row=6, column=3)
-Button_03.grid(row=4, column=3)
+Button_03.grid(row=1, column=3)
 
 # =======
 Checkbutton1.grid(row=2, column=1)
