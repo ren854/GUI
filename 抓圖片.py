@@ -20,20 +20,21 @@ url ="https://www.lativ.com.tw/Product/GetNewProductCategoryList?MainCategory=WO
 res = requests.get(url,headers=headers)
 data = json.loads(res.text)
 
-for i in range(len(data)):
-    print(data[i]['ProductName'])
-for i in range(len(data)):
-    print('https://s2.lativ.com.tw'+data[i]['image_140'])
+def image():
+    for i in range(len(data)):
+        print(data[i]['ProductName'])
+    for i in range(len(data)):
+        print('https://s2.lativ.com.tw'+data[i]['image_140'])
+        
     
-
-import csv
-
-
-with open('image.csv', 'w', newline='',encoding='utf-8-sig') as csvfile:
-  
-  writer = csv.writer(csvfile,delimiter=' ')
-
-  
-  for i in range(len(data)) :
-     writer.writerow('https://s2.lativ.com.tw'+data[i]['image_140'])
+    import csv
+    
+    
+    with open('image.csv', 'w', newline='',encoding='utf-8-sig') as csvfile:
+      
+      writer = csv.writer(csvfile,delimiter=' ')
+    
+      
+      for i in range(len(data)) :
+         writer.writerow('https://s2.lativ.com.tw'+data[i]['image_140'])
     

@@ -13,20 +13,21 @@ soup=BeautifulSoup(r.text,"html.parser")
 sel=soup.select("div.container_48 a")
 print(sel)
 
-for s in sel:
-    print(s.text)
+def ttext():
+    for s in sel:
+        print(s.text)
+        
+        
+    
+    import csv
     
     
-
-import csv
-
-
-with open('clothes.csv', 'w', newline='',encoding='utf-8-sig') as csvfile:
-  
-  writer = csv.writer(csvfile,delimiter=' ')
-
-  
-  for s in sel:
-     writer.writerow(s.text)
+    with open('clothes.csv', 'w', newline='',encoding='utf-8-sig') as csvfile:
+      
+      writer = csv.writer(csvfile,delimiter=' ')
+    
+      
+      for s in sel:
+         writer.writerow(s.text)
 
   
