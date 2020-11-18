@@ -16,7 +16,7 @@ def mai(s):
     headers = {'cookie': 'ECC=GoogleBot',
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36'
                 }
-    s = str(s)
+
         
     aa=[]
     for p in range(5):   
@@ -24,13 +24,15 @@ def mai(s):
         res = requests.get(url,headers=headers)
         data = json.loads(res.text)
         
-    for i in range(len(data)):
-        print(str(data[i]['Name'])+str(data[i]['Price']))
-        aa.append(data)
+        for i in range(len(data)):
+            print(str(data[i]['Name'])+str(data[i]['Price']))
+            aa.append(data)
     
-    return data
+        return aa
 
-    
+b=mai("大衣")    
+#print(b)
+
 
 
 def cloth(aa):
@@ -45,8 +47,7 @@ def cloth(aa):
                 w.writerow({'名稱':aa[i][j]['Name'],
                             '價格':aa[i][j]['Price'],
                             '圖1':"https://s2.lativ.com.tw" + aa[i][j]['Image']})
-        return aa
-
+cloth(b)
 
 def text_cleanup(text):
     new =""
@@ -57,6 +58,8 @@ def text_cleanup(text):
 
 
 
+
+######################################圖片漏抓#####################################
 def get_ph(aa):
     for i in range(len(aa)):
         for j in range(len(aa[i])):
@@ -70,7 +73,7 @@ def get_ph(aa):
                     if not os.path.isfile(filepath_1): #檢查是否下載過圖片，沒有就下載
                         wget.download(url_1,filepath_1)
                         
-    return aa
+get_ph(b)
 
 
                         
