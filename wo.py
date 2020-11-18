@@ -8,12 +8,13 @@ Created on Sun Nov  1 13:04:59 2020
 import requests
 from bs4 import BeautifulSoup
 
-r=requests.get("https://www.lativ.com.tw/WOMEN")
-soup=BeautifulSoup(r.text,"html.parser")
-sel=soup.select("div.container_48 a")
-print(sel)
+def mai():
+    r=requests.get("https://www.lativ.com.tw/WOMEN")
+    soup=BeautifulSoup(r.text,"html.parser")
+    sel=soup.select("div.container_48 a")
+    print(sel)
 
-def ttext():
+def ttext(sel):
     for s in sel:
         print(s.text)
         

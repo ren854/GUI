@@ -11,14 +11,15 @@ import json
 from time import sleep
 import csv
 import os
-import wget
-
-headers = {'cookie': 'ECC=GoogleBot',
-           'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36'
-           }   
-url ="https://www.lativ.com.tw/Product/GetNewProductCategoryList?MainCategory=WOMEN&pageIndex=0&cacheID=35976"
-res = requests.get(url,headers=headers)
-data = json.loads(res.text)
+import wget 
+def mai():
+    headers = {'cookie': 'ECC=GoogleBot',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36'
+            }   
+    url ="https://www.lativ.com.tw/Product/GetNewProductCategoryList?MainCategory=WOMEN&pageIndex=0&cacheID=35976"
+    res = requests.get(url,headers=headers)
+    data = json.loads(res.text)
+    return 
 
 def image():
     for i in range(len(data)):

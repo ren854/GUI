@@ -12,22 +12,22 @@ import csv
 import os
 import wget
 
-
-headers = {'cookie': 'ECC=GoogleBot',
-               'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36'
-               }
-s = str(input("想找什麼款式呢? "))
-    
-aa=[]
-for p in range(5):   
-   url ="https://www.lativ.com.tw/Search/DataList?keyword={}&ec=0&t=0&page={}&category=ALL&cacheID=36182".format(s,p)
-   res = requests.get(url,headers=headers)
-   data = json.loads(res.text)
-    
-   for i in range(len(data)):
-       print(str(data[i]['Name'])+str(data[i]['Price']))
-       aa.append(data)
+def mai(s):
+    headers = {'cookie': 'ECC=GoogleBot',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36'
+                }
+    s = str(s)
         
+    aa=[]
+    for p in range(5):   
+        url ="https://www.lativ.com.tw/Search/DataList?keyword={}&ec=0&t=0&page={}&category=ALL&cacheID=36182".format(s,p)
+        res = requests.get(url,headers=headers)
+        data = json.loads(res.text)
+        
+    for i in range(len(data)):
+        print(str(data[i]['Name'])+str(data[i]['Price']))
+        aa.append(data)
+            
 
     
 
@@ -70,5 +70,5 @@ def get_ph():
                     if not os.path.isfile(filepath_1): #檢查是否下載過圖片，沒有就下載
                         wget.download(url_1,filepath_1)
 
-get_ph()
+
                         
