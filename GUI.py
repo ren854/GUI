@@ -20,7 +20,7 @@ def find_totalPage():
     # -------參數宣告-----------------
 
 root = Tk()
-root.title("mark1_test1")
+root.title("爬蟲蟲")
 show = StringVar()
 Label_4_show = StringVar()
 show_time = StringVar()
@@ -29,6 +29,8 @@ Label_4_show.set("輸入想抓取的總頁數:")
 var1 = IntVar()
 var2 = IntVar()
 var3 = IntVar()
+
+#serch = Entry_2.get()
 
 #<<<<<<< Updated upstream
 # -------------主邏輯------------------
@@ -59,6 +61,8 @@ result_time=Label(root,textvariable=show_time,height=1)'''
 #>>>>>>> ff8d9f7f1ca16989e4cc32bb13fe6d8e8da2dd91
 Button_EXIT=Button(root,text="EXIT",command=root.destroy)
 Button_03=Button(root,text="搜尋",command=find_totalPage)
+Button_04=Button(root,text="爬！",command=find_totalPage)
+
 #Button_03.grid(sticky = W)
 #>>>>>>> Stashed changes
 
@@ -92,9 +96,12 @@ result_time = Label(root, textvariable=show_time, height=1)
 Button_03 = Button(root, text="爬蟲開始", command=find_totalPage)'''
 
 Radiobutton1 = Radiobutton(root, text='PChome', variable=var2, value=2)
-Radiobutton2 = Radiobutton(root, text='衣服', variable=var2, value=10)
+Radiobutton2 = Radiobutton(root, text='Lativ', variable=var2, value=10)
 Checkbutton1 = Checkbutton(root, text="CSV", variable=var1)
-Checkbutton2 = Checkbutton(root, text="DB", variable=var3)
+Checkbutton2 = Checkbutton(root, text="PIC", variable=var3)
+
+#,command=pchome_ver.csv_1()
+#,command=pchome_ver.get_ph()
 
 # ---------------排版-----------------
 
@@ -110,11 +117,12 @@ Entry_4.grid(row=4, column=1)
 
 
 #result_del.grid(row=4, column=1)
-result_time.grid(row=5, column=1)
+#result_time.grid(row=5, column=1)
 
 
 Button_EXIT.grid(row=6, column=3)
 Button_03.grid(row=1, column=3)
+Button_04.grid(row=4, column=3)
 
 # =======
 Checkbutton1.grid(row=2, column=1)

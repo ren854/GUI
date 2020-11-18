@@ -22,13 +22,16 @@ def prods_list(serch,p):
         list1.append(webdata)
     return list1   
 
+#global ts
+#global serch
+#global p
 #ts=prods_list(serch,p)
 #print(ts)
  
 
 
 #把需要的資訊存入CSV
-def csv_1():
+def csv_1(ts):
     with open('a.csv', 'a' , encoding = 'utf-8-sig' , newline = '') as csvfile:
             w = csv.writer(csvfile)
             filednames=(['名稱','網路價','網址','圖1','圖2'])
