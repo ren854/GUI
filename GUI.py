@@ -63,7 +63,9 @@ var3 = IntVar()
         ######-----------按鈕宣告-----------------
 Button_EXIT=Button(root,text="EXIT",command=root.destroy)
 Button_03=Button(root,text="搜尋",command=find_totalPage)
+###################################################直接叫副程式會"沒有回應"
 Button_04=Button(root,text="爬！",command=pchome_ver.get_ph)
+###############################################################
 #Button_03.grid(sticky = W)
 
 Label_1 = Label(root, text="請選擇網站:")
@@ -88,7 +90,11 @@ result_time = Label(root, textvariable=show_time, height=1)
 
 Radiobutton1 = Radiobutton(root, text='PChome', variable=var2, value=2)
 Radiobutton2 = Radiobutton(root, text='Lativ', variable=var2, value=10)
+
+#########################################Checkbutton是選取盒為啥要執行副程式???????
 Checkbutton1 = Checkbutton(root, text="CSV", variable=var1,command=pchome_ver.csv_1)
+#################################################################################ˇˇ
+
 Checkbutton2 = Checkbutton(root, text="PIC", variable=var3)
 
 # ---------------排版-----------------
