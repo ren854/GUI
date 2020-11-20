@@ -4,11 +4,12 @@ import hashlib
 import time
 import threading
 import worm_EX_ver as pchome_ver
+import pri as lative_ver
 #'''----------------------- subfuntion ----------------------- '''
 
 
 def find_totalPage():
-    choice_ = [var2.get(), var1.get(), var3.get()]
+    choice_ = [var4.get(), var1.get(), var3.get()]
     show_time.set(choice_)
     key_word=Entry_2.get()
     totalPage=pchome_ver.get_max_pages(key_word)
@@ -16,6 +17,48 @@ def find_totalPage():
     Label_4_show.set("輸入想抓取的總頁數(小於{}):".format(totalPage))
     return totalPage
 
+def set_wantpage():
+    wp = [var4.get()]
+    show_time.set(wp)
+    wantpage=Entry_4.get()
+    return wantpage
+
+def download_pic():
+    key_word = Entry_2.get()
+    wantpage = int(Entry_4.get())
+    ts = pchome_ver.prods_list(key_word,wantpage)
+    pp = pchome_ver.get_ph()
+    return pp
+
+def pa():
+    site = var2.get()
+    #storage_method = var5.get()
+    key_word = Entry_2.get()
+    wantpage = int(Entry_4.get())
+    ts = pchome_ver.prods_list(key_word,wantpage)
+    #print(key_word,"  ",site,'  ',type(site))
+    #print(storage_method,'  ',type(storage_method))
+    if   site == 2 and var5.get() == True and var6.get() == False:
+        pchome_ver.csv_1(ts)
+    elif site == 2 and var5.get() == False and var6.get() == True:
+        pchome_ver.get_ph(ts)
+    elif site == 2 and var5.get() == True and var6.get() == True:
+        pchome_ver.csv_1(ts)
+        pchome_ver.get_ph(ts)
+        
+    elif site == 10 and var5.get() == True and var6.get() == False:
+        print('pc cccccc')
+        lative_ver.cloth(ts)
+    elif site == 10 and var5.get() == False and var6.get() == True:
+        print('pc p')
+        lative_ver.get_ph(ts)
+    elif site == 10 and var5.get() == True and var6.get() == True:
+        print('pc cp')
+        lative_ver.cloth(ts)
+        lative_ver.get_ph(ts)
+        
+
+'''
 #######################################這東西沒用阿.......
 def get_max_pages(serch):
     serch=str(serch)
@@ -23,7 +66,6 @@ def get_max_pages(serch):
     url ="https://ecshweb.pchome.com.tw/search/v3.3/all/results?q={}&page=1&sort=sale/dc".format(serch)
     res = requests.get(url,headers=headers)
     data = json.loads(res.text)
-    #######################################
     #讀取網頁資訊
     #print(data['totalPage']) 頁數數量
 
@@ -43,7 +85,32 @@ def prods_list(serch,p):
         webdata = data1['prods']
         list1.append(webdata)
     return list1   
-###########################同上
+
+def get_ph():
+    for i in range(len(ts)):
+        for j in range(len(ts[i])):
+                url_1 = "http://d.ecimg.tw/" + ts[i][j]['picB']
+                url_2 = "http://d.ecimg.tw/" + ts[i][j]['picS']
+                path =  ts[i][j]['name']
+                title = text_cleanup(path)
+                filepath_1 =  title + '/' + "1" + '.jpg'
+                filepath_2 =  title + '/' + "2" + '.jpg'
+                if not os.path.isdir(title):  #檢查是否已經有了
+                    os.mkdir(title) #沒有的用標題建立資料夾
+                   
+#url_1='http://d.ecimg.tw//items/DCAS4LA900AKITX/000001_1585012989.jpg'
+#url_2='http://d.ecimg.tw//items/DCAS4LA900AKITX/000002_1599619807.jpg'
+
+#將圖片下載下來
+                    if not os.path.isfile(filepath_1): #檢查是否下載過圖片，沒有就下載
+                        wget.download(url_1,filepath_1)
+                    if not os.path.isfile(filepath_2): #檢查是否下載過圖片，沒有就下載    
+                        wget.download(url_2,filepath_2)
+                    sleep(0.7)
+                    print("圖片要滿出來啦 >_<")
+                    
+###########################同上--------->我只是放在上面方便看，沒有要叫他們~~~~~~~~~~
+'''
 #'''------------------------- main() --------------------------'''
     # -------參數宣告-----------------
 
@@ -57,25 +124,22 @@ Label_4_show.set("輸入想抓取的總頁數:")
 var1 = IntVar()
 var2 = IntVar()
 var3 = IntVar()
+var4 = IntVar()
+var5 = IntVar()
+var6 = IntVar()
 
 # -------------主邏輯------------------
 # -----------參數定義-----------------
         ######-----------按鈕宣告-----------------
 Button_EXIT=Button(root,text="EXIT",command=root.destroy)
 Button_03=Button(root,text="搜尋",command=find_totalPage)
-###################################################直接叫副程式會"沒有回應"
-Button_04=Button(root,text="爬！",command=pchome_ver.get_ph)
-###############################################################
-#Button_03.grid(sticky = W)
+Button_04=Button(root,text="爬！",command=pa)
 
 Label_1 = Label(root, text="請選擇網站:")
 
 Label_2 = Label(root, text="輸入關鍵字:")
 Label_3 = Label(root, text="儲存方式:")
-#Label_4 = Label(root, text="輸入想抓取的總頁數(小於){}:")
 Label_4 = Label(root, textvariable=Label_4_show)
-#.format(find_totalPage.totalPage)
-#.format(find_totalPage()
 
 Entry_1 = Entry(root)
 Entry_2 = Entry(root)
@@ -91,11 +155,8 @@ result_time = Label(root, textvariable=show_time, height=1)
 Radiobutton1 = Radiobutton(root, text='PChome', variable=var2, value=2)
 Radiobutton2 = Radiobutton(root, text='Lativ', variable=var2, value=10)
 
-#########################################Checkbutton是選取盒為啥要執行副程式???????
-Checkbutton1 = Checkbutton(root, text="CSV", variable=var1,command=pchome_ver.csv_1)
-#################################################################################ˇˇ
-
-Checkbutton2 = Checkbutton(root, text="PIC", variable=var3)
+Checkbutton1 = Checkbutton(root, text="CSV", variable=var5,onvalue = 1, offvalue = 0)
+Checkbutton2 = Checkbutton(root, text="PIC", variable=var6,onvalue = 1, offvalue = 0)
 
 # ---------------排版-----------------
 
@@ -105,7 +166,6 @@ Label_3.grid(row=2)
 Label_4.grid(row=4)
 
 Entry_2.grid(row=1, column=1)
-#Entry_3.grid(row=4,column=1)
 Entry_4.grid(row=4, column=1)
 
 Button_EXIT.grid(row=6, column=3)

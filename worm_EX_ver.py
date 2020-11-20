@@ -64,7 +64,7 @@ def text_cleanup(text):
 
 
 #自動創建資料夾 抓取圖片
-def get_ph():
+def get_ph(ts):
     for i in range(len(ts)):
         for j in range(len(ts[i])):
                 url_1 = "http://d.ecimg.tw/" + ts[i][j]['picB']

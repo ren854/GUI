@@ -30,7 +30,7 @@ def mai(s):
     
         return aa
 
-b=mai("大衣")    
+#b=mai("大衣")    
 #print(b)
 
 
@@ -47,7 +47,7 @@ def cloth(aa):
                 w.writerow({'名稱':aa[i][j]['Name'],
                             '價格':aa[i][j]['Price'],
                             '圖1':"https://s2.lativ.com.tw" + aa[i][j]['Image']})
-cloth(b)
+#cloth(b)
 
 def text_cleanup(text):
     new =""
@@ -73,7 +73,7 @@ def get_ph(aa):
                     if not os.path.isfile(filepath_1): #檢查是否下載過圖片，沒有就下載
                         wget.download(url_1,filepath_1)
                         
-get_ph(b)
+#get_ph(b)
 
 
                         
