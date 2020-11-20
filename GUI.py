@@ -1,7 +1,6 @@
 # -------------------------import area-----------------------------
 from tkinter import *
-import hashlib
-import time
+import os
 import threading
 import worm_EX_ver as pchome_ver
 import pri as lative_ver
@@ -60,7 +59,7 @@ def find_totalPage():
     t1.start()
 def pa():
     t1=threading.Thread(target=pa_)
-    Label_5_show.set('下載中請稍後')
+    Label_5_show.set('下載中請稍後 可至OUTPUT資料夾觀看結果')
     t1.start()
 '''
 #######################################這東西沒用阿.......
