@@ -32,7 +32,9 @@ def prods_list(serch,p):
 
 #把需要的資訊存入CSV
 def csv_1(ts):
-    with open('a.csv', 'a' , encoding = 'utf-8-sig' , newline = '') as csvfile:
+    if not os.path.isdir('.//output'):  #檢查是否已經有了
+        os.mkdir('.//output')
+    with open('.//output//a.csv', 'a' , encoding = 'utf-8-sig' , newline = '') as csvfile:
             w = csv.writer(csvfile)
             filednames=(['名稱','網路價','網址','圖1','圖2'])
             w = csv.DictWriter(csvfile,fieldnames=filednames)
@@ -65,12 +67,13 @@ def text_cleanup(text):
 
 #自動創建資料夾 抓取圖片
 def get_ph(ts):
+    
     for i in range(len(ts)):
         for j in range(len(ts[i])):
                 url_1 = "http://d.ecimg.tw/" + ts[i][j]['picB']
                 url_2 = "http://d.ecimg.tw/" + ts[i][j]['picS']
                 path =  ts[i][j]['name']
-                title = text_cleanup(path)
+                title = ".//output/"+text_cleanup(path)
                 filepath_1 =  title + '/' + "1" + '.jpg'
                 filepath_2 =  title + '/' + "2" + '.jpg'
                 if not os.path.isdir(title):  #檢查是否已經有了

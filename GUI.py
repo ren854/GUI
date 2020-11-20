@@ -8,36 +8,31 @@ import pri as lative_ver
 #'''----------------------- subfuntion ----------------------- '''
 
 
-def find_totalPage():
+def find_totalPage_():
     choice_ = [var4.get(), var1.get(), var3.get()]
-    show_time.set(choice_)
     key_word=Entry_2.get()
     totalPage=pchome_ver.get_max_pages(key_word)
-    show_time.set(totalPage)
     Label_4_show.set("輸入想抓取的總頁數(小於{}):".format(totalPage))
+    Label_5_show.set('')
     return totalPage
 
 def set_wantpage():
     wp = [var4.get()]
-    show_time.set(wp)
     wantpage=Entry_4.get()
     return wantpage
 
 def download_pic():
     key_word = Entry_2.get()
     wantpage = int(Entry_4.get())
-    ts = pchome_ver.prods_list(key_word,wantpage)
-    pp = pchome_ver.get_ph()
-    return pp
+    pchome_ver.prods_list(key_word,wantpage)
+    pchome_ver.get_ph()
+    Label_5_show.set('')
 
-def pa():
+def pa_():
     site = var2.get()
-    #storage_method = var5.get()
     key_word = Entry_2.get()
     wantpage = int(Entry_4.get())
     ts = pchome_ver.prods_list(key_word,wantpage)
-    #print(key_word,"  ",site,'  ',type(site))
-    #print(storage_method,'  ',type(storage_method))
     if   site == 2 and var5.get() == True and var6.get() == False:
         pchome_ver.csv_1(ts)
     elif site == 2 and var5.get() == False and var6.get() == True:
@@ -56,7 +51,18 @@ def pa():
         print('pc cp')
         lative_ver.cloth(ts)
         lative_ver.get_ph(ts)
+    Label_5_show.set('')
         
+####################多線程處理#############
+def find_totalPage():
+    t1=threading.Thread(target=find_totalPage_)
+    Label_5_show.set('搜尋中請稍後')
+    t1.start()
+def pa():
+    t1=threading.Thread(target=pa_)
+    Label_5_show.set('下載中請稍後')
+    t1.start()
+
 
 '''
 #######################################這東西沒用阿.......
@@ -118,7 +124,7 @@ root = Tk()
 root.title("爬蟲蟲")
 show = StringVar()
 Label_4_show = StringVar()
-show_time = StringVar()
+Label_5_show = StringVar()
 Label_4_show.set("輸入想抓取的總頁數:")
 
 var1 = IntVar()
@@ -136,10 +142,10 @@ Button_03=Button(root,text="搜尋",command=find_totalPage)
 Button_04=Button(root,text="爬！",command=pa)
 
 Label_1 = Label(root, text="請選擇網站:")
-
 Label_2 = Label(root, text="輸入關鍵字:")
 Label_3 = Label(root, text="儲存方式:")
 Label_4 = Label(root, textvariable=Label_4_show)
+Label_5 = Label(root, textvariable=Label_5_show)
 
 Entry_1 = Entry(root)
 Entry_2 = Entry(root)
@@ -148,7 +154,7 @@ Entry_4 = Entry(root)
 
 result = Label(root, textvariable=show, height=3, width=30)
 
-result_time = Label(root, textvariable=show_time, height=1)
+#result_time = Label(root, textvariable=show_time, height=1)
 
 # -----------按鈕宣告-----------------
 
@@ -164,6 +170,7 @@ Label_1.grid(row=3)
 Label_2.grid(row=1)
 Label_3.grid(row=2)
 Label_4.grid(row=4)
+Label_5.grid(row=5,column=1)
 
 Entry_2.grid(row=1, column=1)
 Entry_4.grid(row=4, column=1)
