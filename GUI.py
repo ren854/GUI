@@ -40,7 +40,7 @@ def pa_():
     elif site == 2 and var5.get() == True and var6.get() == True:
         pchome_ver.csv_1(ts)
         pchome_ver.get_ph(ts)
-        
+#####################以上已完成######################      
     elif site == 10 and var5.get() == True and var6.get() == False:
         print('pc cccccc')
         lative_ver.cloth(ts)
@@ -62,8 +62,6 @@ def pa():
     t1=threading.Thread(target=pa_)
     Label_5_show.set('下載中請稍後')
     t1.start()
-
-
 '''
 #######################################這東西沒用阿.......
 def get_max_pages(serch):
