@@ -1,6 +1,6 @@
 # -------------------------import area-----------------------------
 from tkinter import *
-import os
+import os,time
 import threading
 import worm_EX_ver as pchome_ver
 import pri as lative_ver
@@ -8,11 +8,13 @@ import pri as lative_ver
 
 
 def find_totalPage_():
+    global thr
     choice_ = [var4.get(), var1.get(), var3.get()]
     key_word=Entry_2.get()
     totalPage=pchome_ver.get_max_pages(key_word)
     Label_4_show.set("輸入想抓取的總頁數(小於{}):".format(totalPage))
-    Label_5_show.set('')
+    thr=True
+    Label_5_show.set('完成')
     return totalPage
 
 def set_wantpage():
@@ -21,13 +23,16 @@ def set_wantpage():
     return wantpage
 
 def download_pic():
+    global thr
     key_word = Entry_2.get()
     wantpage = int(Entry_4.get())
     pchome_ver.prods_list(key_word,wantpage)
     pchome_ver.get_ph()
-    Label_5_show.set('')
+    thr=True
+    Label_5_show.set('完成')
 
 def pa_():
+    global thr
     site = var2.get()
     key_word = Entry_2.get()
     wantpage = int(Entry_4.get())
@@ -50,17 +55,41 @@ def pa_():
         print('pc cp')
         lative_ver.cloth(ts)
         lative_ver.get_ph(ts)
-    Label_5_show.set('')
+    thr=True
+    Label_5_show.set('完成')
         
 ####################多線程處理#############
 def find_totalPage():
     t1=threading.Thread(target=find_totalPage_)
+    t2=threading.Thread(target=act,args=['搜尋中請稍後'])
     Label_5_show.set('搜尋中請稍後')
+    t2.start()
     t1.start()
+    
 def pa():
     t1=threading.Thread(target=pa_)
-    Label_5_show.set('下載中請稍後 可至OUTPUT資料夾觀看結果')
+    t2=threading.Thread(target=act,args=['下載中請稍後'])
+    Label_5_show.set('下載中請稍後')
+    t2.start()
     t1.start()
+    
+def act(text):
+    global thr
+    con=0
+    print(thr)
+    while thr==False:
+        text_=text
+        if con%5==0:
+            con=con+1
+        else:
+            for i in range(con%5):    
+                text_=text_+'.'
+            con=con+1
+        Label_5_show.set(text_)
+        print(text_)
+        time.sleep(0.1)
+    thr=False
+        
 '''
 #######################################這東西沒用阿.......
 def get_max_pages(serch):
@@ -116,7 +145,8 @@ def get_ph():
 '''
 #'''------------------------- main() --------------------------'''
     # -------參數宣告-----------------
-
+global thr
+thr=False
 root = Tk()
 root.title("爬蟲蟲")
 show = StringVar()
