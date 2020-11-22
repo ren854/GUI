@@ -15,13 +15,16 @@ def find_totalPage_():
     if site == 2:
         totalPage=pchome_ver.get_max_pages(key_word)
         print('pc')
+        Label_4_show.set("輸入想抓取的總頁數(小於{}):".format(totalPage))
+        thr=True
+        Label_5_show.set('完成')
+        return totalPage
     elif site == 10:
         totalPage=lative_ver.mai(key_word)
         print('laa')
-    Label_4_show.set("輸入想抓取的總頁數(小於{}):".format(totalPage))
-    thr=True
-    Label_5_show.set('完成')
-    return totalPage
+        thr=True
+        Label_5_show.set('此網站不支援此功能')
+        return totalPage
 
 
 def download_pic():
