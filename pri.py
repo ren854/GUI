@@ -35,7 +35,7 @@ def mai(s):
 
 
 #全部產品網址
-def LAPD():
+def LAPD(m):
     Lativ_APD=[]
     for i in range(len(m)):
         for j in range(len(m[i])):
@@ -47,7 +47,9 @@ def LAPD():
 
 #將json存成csv檔
 def cloth(m):
-        with open('Lativ.csv', 'a' , encoding = 'utf-8-sig' , newline = '') as csvfile:
+    if not os.path.isdir('.//output'):  #檢查是否已經有了
+        os.mkdir('.//output')
+    with open('.//output//Lativ.csv', 'a' , encoding = 'utf-8-sig' , newline = '') as csvfile:
             w = csv.writer(csvfile)
             filednames=(['名稱','價格','網址'])
             w = csv.DictWriter(csvfile,fieldnames=filednames)
@@ -61,11 +63,13 @@ def cloth(m):
 
 
 #將需要圖片網址存成List
-def APU(pg):
+def APU(m,pg):
     All_Ph_Url=[]
+    #s = []
+    #m = mai(s)
     for i in range(0,pg):
         #print(bb[i])
-        response = requests.get(LAPD()[i])
+        response = requests.get(LAPD(m)[i])
         soup = BeautifulSoup(response.text, "html.parser")
         #print(soup.prettify())  #輸出排版後的HTML內容
         result = soup.find_all("img")
@@ -80,13 +84,13 @@ def APU(pg):
 ################## 這裡pg輸入太大 資料要讀比較多 會跑很久 所以 抓圖也會跑很久 ###################
 
 #抓圖
-def get_html_ph(pg):
+def get_html_ph(m,pg):
     print("開始抓圖")
-    aaa=APU()
+    aaa=APU(m,pg)
     for i in range(0,pg):
             print("再來再來")
             #print(APU[i][j])
-            path = "No." + str(i+2)
+            path = ".//output/" + "No." + str(i+1)
             #print(path)
             title = path
             if not os.path.isdir(title):  #檢查是否已經有了
@@ -110,7 +114,8 @@ if __name__== "__main__":
 
     pg = int(input("請輸入要抓的圖片數量"))
     
-
+#APU(pg)
+#get_html_ph(pg)
 
 
 ''' 消除非法字元 暫時用不到

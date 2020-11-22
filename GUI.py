@@ -6,21 +6,23 @@ import worm_EX_ver as pchome_ver
 import pri as lative_ver
 #'''----------------------- subfuntion ----------------------- '''
 
-
+#輸入關鍵字，找到搜尋結果的最大頁數
 def find_totalPage_():
     global thr
     choice_ = [var4.get(), var1.get(), var3.get()]
     key_word=Entry_2.get()
-    totalPage=pchome_ver.get_max_pages(key_word)
+    site = var2.get()
+    if site == 2:
+        totalPage=pchome_ver.get_max_pages(key_word)
+        print('pc')
+    elif site == 10:
+        totalPage=lative_ver.mai(key_word)
+        print('laa')
     Label_4_show.set("輸入想抓取的總頁數(小於{}):".format(totalPage))
     thr=True
     Label_5_show.set('完成')
     return totalPage
 
-def set_wantpage():
-    wp = [var4.get()]
-    wantpage=Entry_4.get()
-    return wantpage
 
 def download_pic():
     global thr
@@ -31,12 +33,15 @@ def download_pic():
     thr=True
     Label_5_show.set('完成')
 
+#開始爬蟲
 def pa_():
     global thr
     site = var2.get()
     key_word = Entry_2.get()
     wantpage = int(Entry_4.get())
     ts = pchome_ver.prods_list(key_word,wantpage)
+    m = lative_ver.mai(key_word)
+    #pchome
     if   site == 2 and var5.get() == True and var6.get() == False:
         pchome_ver.csv_1(ts)
     elif site == 2 and var5.get() == False and var6.get() == True:
@@ -44,32 +49,29 @@ def pa_():
     elif site == 2 and var5.get() == True and var6.get() == True:
         pchome_ver.csv_1(ts)
         pchome_ver.get_ph(ts)
-#####################以上已完成######################      
+    #lative
     elif site == 10 and var5.get() == True and var6.get() == False:
-        print('pc cccccc')
-        lative_ver.cloth(ts)
+        lative_ver.cloth(m)
     elif site == 10 and var5.get() == False and var6.get() == True:
-        print('pc p')
-        lative_ver.get_ph(ts)
+        lative_ver.get_html_ph(m,wantpage)
     elif site == 10 and var5.get() == True and var6.get() == True:
-        print('pc cp')
-        lative_ver.cloth(ts)
-        lative_ver.get_ph(ts)
+        lative_ver.cloth(m)
+        lative_ver.get_html_ph(m,wantpage)
     thr=True
     Label_5_show.set('完成')
         
 ####################多線程處理#############
 def find_totalPage():
     t1=threading.Thread(target=find_totalPage_)
-    t2=threading.Thread(target=act,args=['搜尋中請稍後'])
-    Label_5_show.set('搜尋中請稍後')
+    t2=threading.Thread(target=act,args=['搜尋中請稍候'])
+    Label_5_show.set('搜尋中請稍候')
     t2.start()
     t1.start()
     
 def pa():
     t1=threading.Thread(target=pa_)
-    t2=threading.Thread(target=act,args=['下載中請稍後'])
-    Label_5_show.set('下載中請稍後')
+    t2=threading.Thread(target=act,args=['下載中請稍候'])
+    Label_5_show.set('下載中請稍候')
     t2.start()
     t1.start()
     
@@ -86,63 +88,11 @@ def act(text):
                 text_=text_+'.'
             con=con+1
         Label_5_show.set(text_)
-        print(text_)
+        #print(text_)
         time.sleep(0.1)
     thr=False
         
-'''
-#######################################這東西沒用阿.......
-def get_max_pages(serch):
-    serch=str(serch)
-    #####################################別這樣寫拉用import的方式叫,不然會出bug
-    url ="https://ecshweb.pchome.com.tw/search/v3.3/all/results?q={}&page=1&sort=sale/dc".format(serch)
-    res = requests.get(url,headers=headers)
-    data = json.loads(res.text)
-    #讀取網頁資訊
-    #print(data['totalPage']) 頁數數量
 
-    Tp = data['totalPage']+1
-##################這個return沒人收阿????????????????
-    return Tp
-###################同上
-def prods_list(serch,p):
-    list1=[]
-    for num in range(1,p):
-        page_url = 'https://ecshweb.pchome.com.tw/search/v3.3/all/results?q={}&page={}&sort=sale/dc'.format(serch,num)
-#print(page_url) #所有頁面網址
-        sleep(0.7)        
-        res1 = requests.get(page_url,headers=headers)
-        data1 = json.loads(res1.text)
-#print(data1) #頁面的內容
-        webdata = data1['prods']
-        list1.append(webdata)
-    return list1   
-
-def get_ph():
-    for i in range(len(ts)):
-        for j in range(len(ts[i])):
-                url_1 = "http://d.ecimg.tw/" + ts[i][j]['picB']
-                url_2 = "http://d.ecimg.tw/" + ts[i][j]['picS']
-                path =  ts[i][j]['name']
-                title = text_cleanup(path)
-                filepath_1 =  title + '/' + "1" + '.jpg'
-                filepath_2 =  title + '/' + "2" + '.jpg'
-                if not os.path.isdir(title):  #檢查是否已經有了
-                    os.mkdir(title) #沒有的用標題建立資料夾
-                   
-#url_1='http://d.ecimg.tw//items/DCAS4LA900AKITX/000001_1585012989.jpg'
-#url_2='http://d.ecimg.tw//items/DCAS4LA900AKITX/000002_1599619807.jpg'
-
-#將圖片下載下來
-                    if not os.path.isfile(filepath_1): #檢查是否下載過圖片，沒有就下載
-                        wget.download(url_1,filepath_1)
-                    if not os.path.isfile(filepath_2): #檢查是否下載過圖片，沒有就下載    
-                        wget.download(url_2,filepath_2)
-                    sleep(0.7)
-                    print("圖片要滿出來啦 >_<")
-                    
-###########################同上--------->我只是放在上面方便看，沒有要叫他們~~~~~~~~~~
-'''
 #'''------------------------- main() --------------------------'''
     # -------參數宣告-----------------
 global thr
@@ -188,8 +138,8 @@ result = Label(root, textvariable=show, height=3, width=30)
 Radiobutton1 = Radiobutton(root, text='PChome', variable=var2, value=2)
 Radiobutton2 = Radiobutton(root, text='Lativ', variable=var2, value=10)
 
-Checkbutton1 = Checkbutton(root, text="CSV", variable=var5,onvalue = 1, offvalue = 0)
-Checkbutton2 = Checkbutton(root, text="PIC", variable=var6,onvalue = 1, offvalue = 0)
+Checkbutton1 = Checkbutton(root, text="CSV", variable=var5)
+Checkbutton2 = Checkbutton(root, text="PIC", variable=var6)
 
 # ---------------排版-----------------
 
