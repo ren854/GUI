@@ -14,14 +14,12 @@ def find_totalPage_():
     site = var2.get()
     if site == 2:
         totalPage=pchome_ver.get_max_pages(key_word)
-        print('pc')
         Label_4_show.set("輸入想抓取的總頁數(小於{}):".format(totalPage))
         thr=True
         Label_5_show.set('完成')
         return totalPage
     elif site == 10:
         totalPage=lative_ver.mai(key_word)
-        print('laa')
         thr=True
         Label_5_show.set('此網站不支援此功能')
         return totalPage
@@ -46,12 +44,12 @@ def pa_():
     m = lative_ver.mai(key_word)
     #pchome
     if   site == 2 and var5.get() == True and var6.get() == False:
-        pchome_ver.csv_1(ts)
+        pchome_ver.csv_1(ts)    #存成csv
     elif site == 2 and var5.get() == False and var6.get() == True:
-        pchome_ver.get_ph(ts)
+        pchome_ver.get_ph(ts)   #存成圖片
     elif site == 2 and var5.get() == True and var6.get() == True:
         pchome_ver.csv_1(ts)
-        pchome_ver.get_ph(ts)
+        pchome_ver.get_ph(ts)   #存成csv+圖片
     #lative
     elif site == 10 and var5.get() == True and var6.get() == False:
         lative_ver.cloth(m)
@@ -59,7 +57,7 @@ def pa_():
         lative_ver.get_html_ph(m,wantpage)
     elif site == 10 and var5.get() == True and var6.get() == True:
         lative_ver.cloth(m)
-        lative_ver.get_html_ph(m,wantpage)
+        lative_ver.get_html_ph(m,wantpage)   #同pchome
     thr=True
     Label_5_show.set('完成')
         
