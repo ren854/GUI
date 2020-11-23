@@ -94,13 +94,13 @@ def get_html_ph(m,pg):
             #print(path)
             title = path
             if not os.path.isdir(title):  #檢查是否已經有了
-                os.mkdir(title) #沒有的用標題建立資料夾
-                for j in range(3,10):
-                    url_1 = aaa[i][j] ####直接Call APU() 會跑很慢 所以設定成aaa 慢的原因不明###
-                    filepath_1 =  title + '/' + str(j-2) + '.jpg'
-                    print(filepath_1)
-                    if not os.path.isfile(filepath_1): #檢查是否下載過圖片，沒有就下載
-                        wget.download(url_1,filepath_1)
+                os.makedirs(title) #沒有的用標題建立資料夾
+            for j in range(3,10):
+                url_1 = aaa[i][j] ####直接Call APU() 會跑很慢 所以設定成aaa 慢的原因不明###
+                filepath_1 =  title + '/' + str(j-2) + '.jpg'
+                print(filepath_1)
+                if not os.path.isfile(filepath_1): #檢查是否下載過圖片，沒有就下載
+                    wget.download(url_1,filepath_1)
 
 if __name__== "__main__":
 
